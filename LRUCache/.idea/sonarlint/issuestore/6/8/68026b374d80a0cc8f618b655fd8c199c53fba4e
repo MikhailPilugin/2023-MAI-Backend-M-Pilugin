@@ -1,13 +1,11 @@
 
 i
-java:S11920"GDefine a constant instead of duplicating this literal "Walter" 3 times.(œå½¸şÿÿÿÿ8éÊÈú‚1
+java:S1192"GDefine a constant instead of duplicating this literal "Walter" 3 times.(ª€áŒüÿÿÿÿ8šêÈš„1
 7
 java:S1220""Move this file to a named package.8éÊÈú‚1
-e
-java:S3824"HReplace this "Map.containsKey()" with a call to "Map.computeIfAbsent()".(Ï›Öú8øÊÈú‚1
-f
-java:S3824"IReplace this "Map.containsKey()" with a call to "Map.computeIfPresent()".(éÄšâ8øÊÈú‚1
-U	java:S106("9Replace this use of System.out or System.err by a logger.(ƒ“œ€8ÿÊÈú‚1
-Z	java:S106*"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ8‚ËÈú‚1
-Z	java:S1065"9Replace this use of System.out or System.err by a logger.(ĞÔÿûÿÿÿÿ8í‡Êú‚1
-U	java:S106;"9Replace this use of System.out or System.err by a logger.(©èÉì8íÂÊú‚1
+U	java:S106"9Replace this use of System.out or System.err by a logger.(öú¡À8¡êÈš„1
+X	java:S125
+"<This block of commented-out lines of code should be removed.(‘Ô²Ó8Ê™¯›„1
+X	java:S125"<This block of commented-out lines of code should be removed.(‘Ô²Ó8îö«„1
+U	java:S106"9Replace this use of System.out or System.err by a logger.(›ú 8¢êÈš„1
+X	java:S125"<This block of commented-out lines of code should be removed.(‘Ô²Ó8îö«„1
