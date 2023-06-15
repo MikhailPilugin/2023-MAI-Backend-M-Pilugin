@@ -75,3 +75,9 @@ def __books__(books):
     for book in books:
         data.append(book.to_json())
     return data
+
+def __authors__(authors):
+    data = []
+    for author in authors:
+        data.append(author.to_json())
+    return data
