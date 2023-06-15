@@ -1,9 +1,11 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+#from django.shortcuts import render
 from django.views import View
 #from catalog import serializers
 from django.core.serializers import serialize
-# from .serializers import AuthorSerializer, BookSerializer, BookInstanceSerializer, GenreSerializer
+from .serializers import AuthorSerializer, BookSerializer
+from rest_framework import generics
+
 
 from catalog.models import Author, Book
 
@@ -31,3 +33,13 @@ class BookView(View):
             'books': books_serialized_data,
         }
         return JsonResponse(data)
+
+    
+class AuthorProcessing(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+
+
+class BookProcessing(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
