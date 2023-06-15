@@ -1,10 +1,11 @@
-from django.http import JsonResponse
+from django.http import HttpRequest, HttpResponse, JsonResponse
 #from django.shortcuts import render
 from django.views import View
 #from catalog import serializers
 from django.core.serializers import serialize
 from .serializers import AuthorSerializer, BookSerializer
 from rest_framework import generics
+import json
 
 
 from catalog.models import Author, Book
@@ -43,3 +44,24 @@ class AuthorProcessing(generics.RetrieveUpdateDestroyAPIView):
 class BookProcessing(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+
+
+def get_all(request: HttpRequest) -> HttpResponse:
+    def __books__(books):
+        data = []
+        for book in books:
+            data.append(book.to_json())
+        return data
+    
+    def __authors__(authors):
+        data = []
+        for author in authors:
+            data.append(author.to_json())
+        return data
+
+    return HttpResponse(
+        JsonResponse({
+            "authors": __books__(Author.objects.all()),
+            "books": __authors__(Book.objects.all())
+        })
+    )
