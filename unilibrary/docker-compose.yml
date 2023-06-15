@@ -1,0 +1,80 @@
+version: "3.3"
+
+services:
+
+  postgres:
+    build:
+      context: Database
+      dockerfile: Dockerfile
+    container_name: postgres
+    environment:
+      POSTGRES_DB: "stud"
+      POSTGRES_USER: "stud"
+      POSTGRES_PASSWORD: "stud"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    volumes:
+      - ./data/postgres:/var/lib/posgresql/data
+
+    networks:
+      - app-network
+
+    expose:
+      - "5432"
+
+    ports:
+      - "5432:5432"
+
+    command: -p 5432
+
+    restart: always
+
+  django:
+    build:
+      context: unilibrary
+      dockerfile: Dockerfile
+    container_name: django
+    environment:
+      POSTGRES_NAME: "stud"
+      POSTGRES_USER: "stud"
+      POSTGRES_PASSWORD: "stud"
+      POSTGRES_HOST: "postgres"
+
+    restart: always
+
+    volumes:
+      - .:/build
+
+    ports:
+      - "8000:8000"
+
+    networks:
+      - app-network
+
+    depends_on:
+      - postgres
+
+    command: sh -c "export DJANGO_SETTINGS_MODULE=unilibrary.settings_docker &&
+                    python3 unilibrary/manage.py makemigrations &&
+                    python3 unilibrary/manage.py migrate &&
+                    python3 unilibrary/manage.py runserver 0.0.0.0:8000"
+
+  nginx:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+
+    restart: always
+
+    ports:
+      - "81:81"
+
+    networks:
+      - app-network
+
+    depends_on:
+      - django
+
+networks:
+  app-network:
+    driver: bridge
