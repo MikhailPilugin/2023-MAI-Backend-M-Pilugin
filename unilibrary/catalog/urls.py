@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import AuthorView, BookView, AuthorProcessing, BookProcessing, get_all
+from .views import *
 
 
 urlpatterns = [
@@ -9,4 +9,5 @@ urlpatterns = [
     path('api/authors/<int:pk>/', AuthorProcessing.as_view(), name='author-processing'),
     path('api/books/', BookView.as_view()),
     path('api/books/<int:pk>/', BookProcessing.as_view(), name='book-processing'),
+    path("api/book/search", search_book, name="search-book"),
 ]

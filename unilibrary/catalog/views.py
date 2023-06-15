@@ -1,4 +1,4 @@
-from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseBadRequest, JsonResponse
 #from django.shortcuts import render
 from django.views import View
 #from catalog import serializers
@@ -47,12 +47,6 @@ class BookProcessing(generics.RetrieveUpdateDestroyAPIView):
 
 
 def get_all(request: HttpRequest) -> HttpResponse:
-    def __books__(books):
-        data = []
-        for book in books:
-            data.append(book.to_json())
-        return data
-    
     def __authors__(authors):
         data = []
         for author in authors:
@@ -65,3 +59,19 @@ def get_all(request: HttpRequest) -> HttpResponse:
             "books": __authors__(Book.objects.all())
         })
     )
+
+
+def search_book(request: HttpRequest) -> HttpResponse:
+    title = request.GET.get("title")
+    if title is None:
+        return HttpResponseBadRequest(JsonResponse("Title parameter is required"))
+
+    books = Book.objects.filter(title__icontains=title)
+    obj = {"content": __books__(books)}
+    return HttpResponse(JsonResponse(obj))
+
+def __books__(books):
+    data = []
+    for book in books:
+        data.append(book.to_json())
+    return data
