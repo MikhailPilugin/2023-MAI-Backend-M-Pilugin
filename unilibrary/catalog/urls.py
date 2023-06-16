@@ -10,4 +10,6 @@ urlpatterns = [
     path('api/books/', BookView.as_view()),
     path('api/books/<int:pk>/', BookProcessing.as_view(), name='book-processing'),
     path("api/book/search", search_book, name="search-book"),
+    path("api/book/create", add_book, name="add-book"),
+    path("api/author/create", add_author, name="add-author"),
 ]
