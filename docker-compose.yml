@@ -4,7 +4,7 @@ services:
 
   postgres:
     build:
-      context: Database
+      context: unilibrary/Database
       dockerfile: Dockerfile
     container_name: postgres
     environment:
@@ -60,7 +60,7 @@ services:
 
   nginx:
     build:
-      context: nginx
+      context: unilibrary/nginx
       dockerfile: Dockerfile
     container_name: nginx
 
